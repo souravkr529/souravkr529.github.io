@@ -278,12 +278,27 @@
                 line-height: 1.2;
             }
 
+            .header h1 {
+                font-size: 24pt;
+                /* Slightly smaller for mobile */
+                letter-spacing: 1px;
+                line-height: 1.2;
+                margin-bottom: 8px;
+            }
+
             .header .contact {
-                font-size: 10pt;
+                font-size: 11pt;
+                /* Increase readibility */
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 gap: 5px;
-                line-height: 1.5;
+                line-height: 1.4;
+            }
+
+            .sep {
+                display: none;
+                /* Hide separators on mobile */
             }
 
             .print-controls {
@@ -392,8 +407,11 @@
         <header class="header">
             <h1>Sourav Kumar</h1>
             <div class="contact">
-                <a href="mailto:souravkumar1692@gmail.com">souravkumar1692@gmail.com</a> |
-                <a href="https://github.com/souravkr529">github.com/souravkr529</a> | Delhi, India
+                <a href="mailto:souravkumar1692@gmail.com">souravkumar1692@gmail.com</a>
+                <span class="sep">|</span>
+                <a href="https://github.com/souravkr529">github.com/souravkr529</a>
+                <span class="sep">|</span>
+                <span>Delhi, India</span>
             </div>
         </header>
 
