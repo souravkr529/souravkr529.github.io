@@ -252,68 +252,130 @@
 
         /* Mobile Responsive */
         @media screen and (max-width: 768px) {
+
+            html,
+            body {
+                width: 100%;
+                overflow-x: hidden;
+                background: #f0f0f0;
+            }
+
             .resume-page {
                 width: 100%;
+                max-width: 100%;
                 min-height: auto;
                 margin: 0;
-                padding: 20px 15px;
+                padding: 15px;
                 box-shadow: none;
                 border: none;
+                box-sizing: border-box;
             }
 
             .header h1 {
-                font-size: 22pt;
+                font-size: 20pt;
                 letter-spacing: 1px;
+                line-height: 1.2;
             }
 
             .header .contact {
-                font-size: 9.5pt;
+                font-size: 10pt;
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
+                line-height: 1.5;
             }
 
             .print-controls {
                 position: fixed;
-                bottom: 20px;
+                bottom: 0;
                 top: auto;
                 right: 0;
                 left: 0;
                 justify-content: center;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 10px;
-                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                background: white;
+                padding: 15px;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 9999;
+                width: 100%;
             }
 
             .print-btn {
-                padding: 10px 16px;
-                font-size: 13px;
+                padding: 12px 20px;
+                font-size: 14px;
+                flex: 1;
+                max-width: 160px;
+                text-align: center;
             }
 
-            .compact-grid,
-            .projects-grid-box {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            .section-title {
+                font-size: 14pt;
+                margin-top: 15px;
+            }
+
+            .exp-item {
+                margin-bottom: 20px;
             }
 
             .exp-header,
             .exp-role-line,
             .edu-item {
                 flex-direction: column;
-                gap: 2px;
+                align-items: flex-start;
+                gap: 4px;
             }
 
-            .exp-role-line {
-                margin-bottom: 8px;
+            .exp-company {
+                font-size: 12pt;
+            }
+
+            .exp-role {
+                font-size: 11.5pt;
+                color: #222;
+                font-weight: 600;
+            }
+
+            .exp-location,
+            .exp-date {
+                font-size: 10pt;
+                color: #555;
+            }
+
+            .exp-list {
+                padding-left: 15px;
             }
 
             .exp-list li {
+                font-size: 11.5pt;
                 text-align: left;
+                margin-bottom: 6px;
+                line-height: 1.5;
+            }
+
+            .compact-grid,
+            .projects-grid-box {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .project-box {
+                padding: 12px;
+                background: #f9f9f9;
+                border-left-width: 4px;
+            }
+
+            .skills-content {
+                gap: 8px;
+            }
+
+            .skill-row {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
             }
 
             body {
-                padding-bottom: 60px;
-                /* Space for fixed buttons */
+                padding-bottom: 80px;
+                /* Safe space for bottom fixed buttons */
             }
         }
     </style>
