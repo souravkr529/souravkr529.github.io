@@ -1809,9 +1809,10 @@ button {
         order: 2;
     }
 
-    .hero-visual {
-        order: 1;
-        margin-bottom: 20px;
+    /* Hide Circle/Visual and Status Badge on Mobile */
+    .hero-visual,
+    .hero-badge {
+        display: none;
     }
 
     .hero-image-container {
