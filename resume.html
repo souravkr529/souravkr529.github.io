@@ -64,11 +64,41 @@
             html,
             body {
                 background: white;
+                zoom: 100%;
             }
 
             .resume-page {
                 box-shadow: none !important;
                 margin: 0 !important;
+                width: 210mm !important;
+                max-width: 210mm !important;
+                padding: 25px 40px !important;
+            }
+
+            /* Force Desktop Layout for specific elements */
+            .projects-grid-box {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 8px !important;
+            }
+
+            .compact-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            .exp-header,
+            .exp-role-line,
+            .edu-item {
+                flex-direction: row !important;
+            }
+
+            /* Ensure separators are visible */
+            .sep {
+                display: inline !important;
+            }
+
+            /* Adjust contact info layout */
+            .header .contact {
+                display: block !important;
             }
         }
 
