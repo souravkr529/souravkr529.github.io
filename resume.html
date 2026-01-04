@@ -21,7 +21,7 @@
         html,
         body {
             font-family: 'Times New Roman', Georgia, serif;
-            font-size: 11.5pt;
+            font-size: 12pt;
             line-height: 1.4;
             color: #000;
             background: #e0e0e0;
@@ -65,6 +65,8 @@
             body {
                 background: white;
                 zoom: 100%;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             .resume-page {
@@ -72,12 +74,15 @@
                 margin: 0 !important;
                 width: 210mm !important;
                 max-width: 210mm !important;
-                padding: 25px 40px !important;
+                padding: 10px 40px !important;
+                /* Reduced vertical padding for print */
             }
 
             /* Force Desktop Layout for specific elements */
+            /* Force Desktop Layout for specific elements */
             .projects-grid-box {
-                grid-template-columns: repeat(3, 1fr) !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                /* Force 4 columns in print */
                 gap: 8px !important;
             }
 
@@ -103,22 +108,23 @@
         }
 
         .resume-page {
-            width: 210mm;
+            width: 100%;
+            max-width: 210mm;
             min-height: 297mm;
             margin: 20px auto;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            padding: 25px 40px;
+            padding: 20px 40px;
             /* Reduced padding further */
             overflow: hidden;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 4px;
             /* Increased from 12px */
             border-bottom: 2px solid #000;
-            padding-bottom: 16px;
+            padding-bottom: 8px;
             /* Increased from 8px for more space */
         }
 
@@ -141,8 +147,8 @@
         }
 
         .section {
-            margin-bottom: 10px;
-            /* Reduced margin */
+            margin-bottom: 4px;
+            /* Minimum margin */
         }
 
         .section-title {
@@ -151,14 +157,14 @@
             text-transform: uppercase;
             border-bottom: 1px solid #000;
             padding-bottom: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             /* Increased from 6px */
             letter-spacing: 1px;
         }
 
         .exp-item {
-            margin-bottom: 8px;
-            /* Reduced margin */
+            margin-bottom: 4px;
+            /* Minimum margin */
         }
 
         .exp-header {
@@ -175,7 +181,7 @@
 
         .exp-company {
             font-weight: bold;
-            font-size: 11.5pt;
+            font-size: 12pt;
             /* Increased from 11pt */
         }
 
@@ -192,7 +198,7 @@
         }
 
         .exp-role {
-            font-size: 11pt;
+            font-size: 11.5pt;
             /* Increased from 10.5pt */
         }
 
@@ -207,8 +213,8 @@
         }
 
         .exp-list li {
-            font-size: 11pt;
-            /* Increased from 10.5pt */
+            font-size: 11.5pt;
+            /* Restored size */
             margin-bottom: 2px;
             text-align: justify;
         }
@@ -240,34 +246,47 @@
             grid-template-columns: 1fr 1fr;
             gap: 4px 25px;
             /* Increased gap */
-            font-size: 10.5pt;
+            font-size: 11.5pt;
             /* Increased size */
         }
 
-        /* 3-Column Projects Grid */
+        /* 4-Column Projects Grid with Box Style */
         .projects-grid-box {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-            font-size: 10.5pt;
+            font-size: 10pt;
         }
 
         .project-box {
-            padding: 6px 8px;
+            padding: 8px;
             background: #f5f5f5;
             border-left: 3px solid #333;
+            display: block;
+            white-space: normal;
+            /* Allow wrapping inside box if needed */
         }
 
         .project-title {
             font-weight: bold;
-            display: block;
             font-size: 10.5pt;
+            display: block;
             margin-bottom: 2px;
+            color: #000;
         }
 
         .project-desc {
             font-size: 9.5pt;
             color: #444;
+            font-style: normal;
+        }
+
+        .project-desc::before {
+            content: "";
+        }
+
+        .project-desc::before {
+            content: "- ";
         }
 
         .edu-item {
@@ -303,27 +322,28 @@
             }
 
             .header h1 {
-                font-size: 20pt;
-                letter-spacing: 1px;
-                line-height: 1.2;
-            }
-
-            .header h1 {
                 font-size: 24pt;
-                /* Slightly smaller for mobile */
-                letter-spacing: 1px;
                 line-height: 1.2;
                 margin-bottom: 8px;
             }
 
             .header .contact {
                 font-size: 11pt;
-                /* Increase readibility */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 5px;
-                line-height: 1.4;
+            }
+
+            .projects-grid-box {
+                grid-template-columns: 1fr;
+                /* Stack projects 1 per row */
+            }
+
+            .exp-header,
+            .exp-role-line {
+                flex-direction: column;
+                margin-bottom: 5px;
             }
 
             .sep {
@@ -429,8 +449,8 @@
 
 <body>
     <div class="print-controls">
-        <button class="print-btn primary" onclick="window.print()">📄 Download PDF</button>
-        <button class="print-btn secondary" onclick="window.location.href='index.html'">← Portfolio</button>
+        <button class="print-btn primary" onclick="window.print()">📄 Save PDF</button>
+        <button class="print-btn secondary" id="editBtn" onclick="toggleEditMode()">✏️ Edit Resume</button>
     </div>
 
     <div class="resume-page">
@@ -441,9 +461,21 @@
                 <span class="sep">|</span>
                 <a href="https://github.com/souravkr529">github.com/souravkr529</a>
                 <span class="sep">|</span>
+                <a href="https://souravkr529.github.io">souravkr529.github.io</a>
+                <span class="sep">|</span>
                 <span>Delhi, India</span>
             </div>
         </header>
+
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <div style="font-size: 11.5pt; text-align: justify; line-height: 1.5; margin-bottom: 4px;">
+                Senior Security Engineer with 5 years of experience in application security, cloud security, and VAPT.
+                Experienced in leading security initiatives, mentoring and guiding teams, working closely with
+                development and cloud infrastructure teams, and driving risk-based security decisions in Agile delivery
+                environments.
+            </div>
+        </section>
 
         <section class="section">
             <h2 class="section-title">Professional Experience</h2>
@@ -458,12 +490,16 @@
                     <span class="exp-date">Jul 2024 - Present</span>
                 </div>
                 <ul class="exp-list">
-                    <li>Led a team of security analysts, overseeing security <span class="highlight">Vulnerability
-                            Assessment and Penetration Tests</span> for Web, APIs and Mobile (Android)</li>
+                    <li>Led a team of security analysts, overseeing end-to-end security <span
+                            class="highlight">Vulnerability
+                            Assessment and Penetration Testing</span> for web applications, APIs, and Android mobile
+                        platforms</li>
                     <li>Integrated security best practices with dev teams, <span class="highlight">reducing incidents by
                             30%</span> through VA&PT audits</li>
-                    <li>Managed AWS infrastructure with outsourced team, ensuring seamless daily operations and robust
-                        security protocols</li>
+                    <li>Managed AWS infrastructure with an outsourced team, ensuring secure daily operations while
+                        implementing <span class="highlight"></span>cost-optimization strategies</span> that <span
+                            class="highlight">reduced overall cloud spend by approximately 30%</span>
+                    </li>
                     <li>Guided team to configure <span class="highlight">AWS WAF, GuardDuty & Security Hub</span>,
                         reducing attack surface by 40%</li>
                     <li>Integrated <span class="highlight">Wazuh SIEM</span> with active response for real-time threat
@@ -516,17 +552,20 @@
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-content">
                 <div class="skill-row"><span class="skill-label">Security Testing:</span> VAPT, Burp Suite, OWASP ZAP,
-                    Nessus, Nmap, Nikto, SonarQube</div>
+                    Nessus, Nmap, Nikto, SonarQube, SAST/DAST</div>
                 <div class="skill-row"><span class="skill-label">Mobile Security:</span> MobSF, APKtool, Jadx-gui,
                     Frida, Android Security Testing</div>
-                <div class="skill-row"><span class="skill-label">AWS Security:</span> WAF, GuardDuty, Security Hub, KMS,
-                    IAM, CloudTrail</div>
-                <div class="skill-row"><span class="skill-label">SIEM & Logging:</span> Wazuh (Active Response),
-                    CloudFront, ALB, VPC Flow Logs</div>
+                <div class="skill-row"><span class="skill-label">AWS Security & DevSecOps:</span> GuardDuty,
+                    Security Hub, AWS Inspector, IAM, CI/CD Security, CloudTrail</div>
+                <div class="skill-row"><span class="skill-label">SIEM & Logging:</span> Wazuh, Syslog, CloudFront, ALB,
+                    VPC Flow Logs, Apache/Nginx Logs, Web Application Firewall (WAF)</div>
+                <div class="skill-row"><span class="skill-label">AI/ML:</span> Ollama LLM, AWS Rekognition, LLM
+                    Fine-tuning, Serper
+                    API, <i>Cert:
+                        Open-source LLMs & RAG</i></div>
                 <div class="skill-row"><span class="skill-label">Compliance:</span> ISO 27001 (ISMS), ISO 27701 (PIMS),
+                    ISO 9001 (QMS),
                     DPDP Act, PII Protection</div>
-                <div class="skill-row"><span class="skill-label">AI/ML & DevSecOps:</span> Ollama LLM, Serper API, CI/CD
-                    Security, SAST/DAST, cPanel(CSF/LDF)</div>
             </div>
         </section>
 
@@ -539,12 +578,12 @@
                 <div>• AWS Certified Cloud Practitioner</div>
                 <div>• <span class="highlight">Bug Bounty</span> — Urban.io, CircleCI & more</div>
                 <div>• Certified ScrumMaster (CSM)</div>
-                <div>• Google Cybersecurity</div>
-                <div>• Open-source LLMs & RAG</div>
+
+
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" style="margin-top: 8px;">
             <h2 class="section-title">Open Source Projects</h2>
             <div class="projects-grid-box">
                 <a href="https://github.com/souravkr529/ReconX"
@@ -557,29 +596,63 @@
                     <div class="project-box"><span class="project-title">Malware Analyzer</span> <span
                             class="project-desc">AI Static Analysis</span></div>
                 </a>
-                <a href="https://souravkr529.github.io/AI-Audio-To-Text-Converter"
-                    style="text-decoration: none; color: inherit; display: block;">
-                    <div class="project-box"><span class="project-title">AI Audio to Text</span> <span
-                            class="project-desc">AI Speech to Text</span></div>
-                </a>
-                <a href="https://github.com/souravkr529/cpanel-password-rotator"
-                    style="text-decoration: none; color: inherit; display: block;">
-                    <div class="project-box"><span class="project-title">cPanel Rotator</span> <span
-                            class="project-desc">Password Auto</span></div>
-                </a>
-                <a href="https://github.com/souravkr529/AI-Web-Scraper"
-                    style="text-decoration: none; color: inherit; display: block;">
-                    <div class="project-box"><span class="project-title">AI Web Scraper</span> <span
-                            class="project-desc">Ollama + Serper</span></div>
-                </a>
                 <a href="https://github.com/souravkr529/AWS-ALB-Log-Analyzer"
                     style="text-decoration: none; color: inherit; display: block;">
                     <div class="project-box"><span class="project-title">AWS ALB Analyzer</span> <span
-                            class="project-desc">ALB Log Analysis</span></div>
+                            class="project-desc">Bandwidth Cost Saver</span></div>
+                </a>
+                <a href="https://github.com/souravkr529/Private-RAG-Chatbot"
+                    style="text-decoration: none; color: inherit; display: block;">
+                    <div class="project-box"><span class="project-title">Private RAG Chatbot</span> <span
+                            class="project-desc">TinyLlama + Local RAG</span></div>
                 </a>
             </div>
         </section>
     </div>
+    <script>
+        let isEditMode = false;
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const doc = document.querySelector('.resume-page');
+            const btn = document.getElementById('editBtn');
+
+            if (isEditMode) {
+                // Enable Editing
+                doc.contentEditable = "true";
+                doc.style.outline = "2px dashed #007bff";
+                doc.style.outlineOffset = "4px";
+                btn.innerHTML = "💾 Finish Editing";
+                btn.style.background = "#e6f3ff";
+
+                alert("Edit Mode Enabled!\n\n• Click any text to type/edit.\n• Click any LINK to change its URL (website).");
+            } else {
+                // Disable Editing
+                doc.contentEditable = "false";
+                doc.style.outline = "none";
+                btn.innerHTML = "✏️ Edit Resume";
+                btn.style.background = "white";
+            }
+        }
+
+        // Intercept link clicks in Edit Mode to allow URL changing
+        document.addEventListener('click', function (e) {
+            if (isEditMode) {
+                const link = e.target.closest('a');
+                if (link) {
+                    e.preventDefault(); // Stop navigation
+                    e.stopPropagation();
+
+                    const currentUrl = link.getAttribute('href');
+                    const newUrl = prompt("Update Link URL:", currentUrl);
+
+                    if (newUrl !== null) {
+                        link.setAttribute('href', newUrl);
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
